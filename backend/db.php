@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $user = "root";
-$password = "cscpeboy12";
+$password = "";
 $dbname = "ticket_manager";
 
 // creates connection
