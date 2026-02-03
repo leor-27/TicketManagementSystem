@@ -75,3 +75,8 @@ button:hover {
 tbody {
     font-size: 14px;
 }
+
+.profile-info {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}

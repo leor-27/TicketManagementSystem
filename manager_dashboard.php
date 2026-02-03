@@ -59,6 +59,7 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
             <?php
                 while ($row = $userList->fetch_assoc()): ?>
             <tr>
+            <form action="backend/ticket-handler.php" method="POST"> <!-- removed this: id="ticket-form" class="ticket-form" -->
                 <td><?=htmlspecialchars($row['TICKET_ID']) ?></td>
                 <td><?=htmlspecialchars($row['EMAIL']) ?></td>
                 <td><?=htmlspecialchars($row['REQUEST_TYPE']) ?></td>
@@ -67,18 +68,22 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
                 <td><?=htmlspecialchars($row['CREATED_AT']) ?></td>
                 <td><?=htmlspecialchars($row['LAST_UPDATED']) ?></td>
                 <td>
-                    <select id="request-types" name = "request-types" class="filter-btn" required>
-                        <option value="open">Open</option>
-                        <option value="pending">Pending</option>
-                        <option value="ongoing">Ongoing</option>
-                        <option value="accepted">Accepted</option>
-                        <option value="rejected">Rejected</option>
-                        <option value="closed">Closed</option>
-                        <option value="completed">Completed</option>
-                        <option value="failed">Failed</option>
+                    <select id="status" name = "status" class="filter-btn" required>
+                        <option value="Open">Open</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Closed">Closed</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Failed">Failed</option>
                     </select>
                 </td>
-                <td> <button type="submit">Update</button> </td>
+                <td> 
+                    <input type="hidden" name="ticket_id" value="<?= $row['TICKET_ID'] ?>"> <!-- ai generated -->
+                    <button type="submit">Update</button> 
+                </td>
+            </form>
             </tr>
             <?php endwhile; ?>
         </tbody>

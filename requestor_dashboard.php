@@ -45,11 +45,11 @@ if (!isset($_SESSION['role'])) {
                     <label for="request-types">Request Type: </label>
 
                     <select id="request-types" name = "request-types" class="filter-btn" required>
-                        <option value="general">General Inquiry</option>
-                        <option value="maintenance">Maintenance</option>
-                        <option value="complaint">Complaint</option>
-                        <option value="feature">Feature Request</option>
-                        <option value="technical">Technical</option>
+                        <option value="General Inquiry">General Inquiry</option>
+                        <option value="Maintenance">Maintenance</option>
+                        <option value="Complaint">Complaint</option>
+                        <option value="Feature Request">Feature Request</option>
+                        <option value="Technical">Technical</option>
                     </select>
                 </div>
 

@@ -44,18 +44,20 @@ if (!$user) {
         </div>
     </div>
 
-    <p>Full Name: <?=htmlspecialchars($user['NAME']) ?></p>
+    <div class = "profile-info">
+        <p>Full Name: <?=htmlspecialchars($user['NAME']) ?></p>
 
-    <?php
-        $birthdate = new DateTime($user['BIRTHDATE']);
-        $today = new DateTime();
-        $age = $today->diff($birthdate)->y;
-    ?>
+        <?php
+            $birthdate = new DateTime($user['BIRTHDATE']);
+            $today = new DateTime();
+            $age = $today->diff($birthdate)->y;
+        ?>
 
-    <p>Age: <?= $age ?></p>
-    <p>Gender: <?=htmlspecialchars($user['GENDER']) ?></p>
-    <p>Contact Info: <?=htmlspecialchars($user['MOBILE_NUMBER']) ?> </p>
-    <p class = "email"> <?=htmlspecialchars($user['EMAIL']) ?> </p>
+        <p>Age: <?= $age ?></p>
+        <p>Gender: <?=htmlspecialchars($user['GENDER']) ?></p>
+        <p>Contact Info: <?=htmlspecialchars($user['MOBILE_NUMBER']) ?> </p>
+        <p class = "email"> <?=htmlspecialchars($user['EMAIL']) ?> </p>
+        </div>
 
     <button class = "logout">
         <a href="backend/logout.php">Logout</a>

@@ -21,8 +21,6 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
 </head>
 <body>
     <h1>Manager Dashboard</h1>
-    <p>Last logged in at: <?php echo date("m-d-Y H:i", $_SESSION['latestLoginTime']);
- ?></p>
 
     <div class="dropdown-menu">
         <div class="menu-header">
