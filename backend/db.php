@@ -1,0 +1,14 @@
+<?php
+$host = "localhost";
+$user = "root";
+$password = "";
+$dbname = "php_activity1";
+
+// creates connection
+$conn = new mysqli($host, $user, $password, $dbname);
+
+// checks connection
+if ($conn->connect_error) {
+    die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
+}
+?>

@@ -1,0 +1,73 @@
+html, body {
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+label {
+    display: block;
+    padding-bottom: 5px;
+}
+
+.fields {
+    padding-bottom: 20px;
+}
+
+.email {
+    margin-top: -12px;
+    margin-left: 90px;
+}
+
+th {
+    padding-top: 30px;
+}
+
+td {
+    padding-top: 10px;
+}
+
+th, td {
+    padding-right: 60px;
+}
+
+.ticket-inputs {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.tickets, .dashboard {
+    background-color: rgb(198, 198, 198);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+textarea {
+    resize: none;
+}
+
+.logout {
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.menu-header button {
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+
+button:hover {
+    transform: scale(1.02);
+}
+
+.loginButton {
+    cursor: pointer;
+}
+
+.signUpText {
+    font-weight: 600;
+}
