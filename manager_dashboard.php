@@ -5,7 +5,7 @@ include 'backend/db.php';
 $users = "SELECT Ticket.*, User.EMAIL
     FROM Ticket
     JOIN User ON Ticket.USER_ID = User.USER_ID
-    ORDER BY Ticket.USER_ID DESC";
+    ORDER BY Ticket.CREATED_AT DESC"; // joined the User and Ticket entities to retrieve simultaneously
 $userList = $conn->query($users);
 
 if (!isset($_SESSION['role'])) { // redirects if user is not logged in
@@ -28,15 +28,15 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
     <div class="dropdown-menu">
         <div class="menu-header">
             <button>
-                <a href="manager-user-list.php">User List</a>
+                <a href="manager_request_list.php">User List</a>
             </button>
             <button>
-                <a href="manager-dashboard.php">Ticket List</a>
+                <a href="manager_dashboard.php">Ticket List</a>
             </button>
         </div>
     </div>
 
-    <table>
+    <table class = "ticket-list">
         <colgroup>
             <col class="requestor-id"> <col class="requestor"> 
             <col class="request-type"> <col class = "request-description"> 
@@ -59,18 +59,28 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
             <?php
                 while ($row = $userList->fetch_assoc()): ?>
             <tr>
-            <form action="backend/ticket-handler.php" method="POST"> <!-- removed this: id="ticket-form" class="ticket-form" -->
-                <td><?=htmlspecialchars($row['TICKET_ID']) ?></td>
+            <form action="backend/ticket-handler.php" method="POST">  <!-- removed this: id="ticket-form" class="ticket-form" -->
+                <td><?=htmlspecialchars($row['TICKET_ID']) ?></td> 
                 <td><?=htmlspecialchars($row['EMAIL']) ?></td>
                 <td><?=htmlspecialchars($row['REQUEST_TYPE']) ?></td>
                 <td><?=htmlspecialchars($row['DESCRIPTION']) ?></td>
                 <td><?=htmlspecialchars($row['STATUS']) ?></td>
-                <td><?=htmlspecialchars($row['CREATED_AT']) ?></td>
-                <td><?=htmlspecialchars($row['LAST_UPDATED']) ?></td>
+                <td>
+                    <?php
+                        $created = new DateTime($row['CREATED_AT']);
+                        echo $created->format("M j, Y H:i"); // formats the date
+                    ?> <!-- ai -->
+                </td>
+                <td>
+                    <?php
+                        $updated = new DateTime($row['LAST_UPDATED']);
+                        echo $updated->format("M j, Y H:i");
+                    ?>
+                </td>
                 <td>
                     <select id="status" name = "status" class="filter-btn" required>
-                        <option value="Open">Open</option>
                         <option value="Pending">Pending</option>
+                        <option value="Open">Open</option>
                         <option value="Ongoing">Ongoing</option>
                         <option value="Accepted">Accepted</option>
                         <option value="Rejected">Rejected</option>

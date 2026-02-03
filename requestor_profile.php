@@ -36,7 +36,7 @@ if (!$user) {
     <div class="dropdown-menu">
         <div class="menu-header">
             <button>
-                <a href="user-profile.php">Requestor Profile</a>
+                <a href="requestor_profile.php">Requestor Profile</a>
             </button>
             <button>
                 <a href="requestor_dashboard.php">Requests</a>
@@ -50,7 +50,7 @@ if (!$user) {
         <?php
             $birthdate = new DateTime($user['BIRTHDATE']);
             $today = new DateTime();
-            $age = $today->diff($birthdate)->y;
+            $age = $today->diff($birthdate)->y; // formats the birthdate to age
         ?>
 
         <p>Age: <?= $age ?></p>

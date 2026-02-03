@@ -14,7 +14,7 @@ if ($step === 'login') { // runs if the user logged in with credentials already 
             alert('Missing credentials.'); 
             window.history.back();
         </script>";
-        exit;
+        exit();
     }
 
     // checks the users from database
@@ -29,16 +29,16 @@ if ($step === 'login') { // runs if the user logged in with credentials already 
             $_SESSION['user_logged_in'] = true;
             $_SESSION['user_id'] = $user['USER_ID'];
             $_SESSION['role'] = $user['ROLE'];
-            $_SESSION['latestLoginTime'] = time();
+            $_SESSION['latestLoginTime'] = date("Y-m-d H:i:s");;
 
             if ($user['ROLE'] === 'Requestor') {
-                header("Location: ../user-profile.php");
-                exit;
+                header("Location: ../requestor_profile.php");
+                exit();
             }
 
             if ($user['ROLE'] === 'Manager') {
-                header("Location: ../manager-user-list.php");
-                exit;
+                header("Location: ../manager_request_list.php");
+                exit();
             }
         }
     }
@@ -46,8 +46,8 @@ if ($step === 'login') { // runs if the user logged in with credentials already 
     echo "<script>
         alert('Invalid email or password.'); 
         window.history.back();
-    </script>";
-    exit;
+    </script>"; // executes if everything that came before was false (wrong username/password)
+    exit();
 }
 
 if ($step === 'signup') { // if the user is signing up for the first time with no credentials yet
@@ -64,7 +64,7 @@ if ($step === 'signup') { // if the user is signing up for the first time with n
             alert('All fields are required.');
             window.history.back();
         </script>";
-        exit;
+        exit();
     }
 
     $gender = strtolower($gender) === 'male' ? 'M' : 'F';
@@ -88,7 +88,7 @@ if ($step === 'signup') { // if the user is signing up for the first time with n
             alert('Email or mobile number already registered.');
             window.history.back();
         </script>";
-        exit;
+        exit();
     }
 
     $stmt = $conn->prepare("
@@ -112,6 +112,6 @@ if ($step === 'signup') { // if the user is signing up for the first time with n
         alert('Account created! Your password is: {$plainPassword}');
         window.location.href = '../index.php?newUser=' + encodeURIComponent('{$first}'); // references the newUser status declared in index.php
     </script>";
-    exit;
+    exit();
 
 }

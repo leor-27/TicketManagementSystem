@@ -5,10 +5,10 @@ include 'backend/db.php';
 $users = "SELECT Ticket.*, User.EMAIL
     FROM Ticket
     JOIN User ON Ticket.USER_ID = User.USER_ID
-    ORDER BY Ticket.USER_ID DESC"; // ai generated
+    ORDER BY Ticket.CREATED_AT DESC"; // ai generated  // joined the User and Ticket entities to retrieve simultaneously
 $userList = $conn->query($users);
 
-if (!isset($_SESSION['role'])) {
+if (!isset($_SESSION['role'])) { // redirects if user is not logged in
     header("Location: index.php");
     exit;
 }
@@ -28,7 +28,7 @@ if (!isset($_SESSION['role'])) {
     <div class="dropdown-menu">
         <div class="menu-header">
             <button>
-                <a href="user-profile.php">Requestor Profile</a>
+                <a href="requestor_profile.php">Requestor Profile</a>
             </button>
             <button>
                 <a href="requestor_dashboard.php">Requests</a>
@@ -82,7 +82,7 @@ if (!isset($_SESSION['role'])) {
                     <?php
                         while ($row = $userList->fetch_assoc()): ?>
                     <tr>
-                        <td><?=htmlspecialchars($row['TICKET_ID']) ?></td>
+                        <td><?=htmlspecialchars($row['TICKET_ID']) ?></td> <!-- shows the database values -->
                         <td><?=htmlspecialchars($row['EMAIL']) ?></td>
                         <td><?=htmlspecialchars($row['REQUEST_TYPE']) ?></td>
                         <td><?=htmlspecialchars($row['STATUS']) ?></td>

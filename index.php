@@ -49,10 +49,9 @@ include 'backend/db.php';
 
     </form>
 
-        <p class="signUpText">
-        <p>Don't have an account?
-            <a href="sign-up.php" id="signUp"><u class = "signUpText">Sign up here.</u></a>
-        </p>    
+    <p>Don't have an account?
+        <a href="sign-up.php" id="signUp"><u class = "signUpText">Sign up here.</u></a>
+    </p>    
     
 </body>
 </html>

@@ -3,17 +3,19 @@ session_start();
 include 'db.php';
 date_default_timezone_set('Asia/Manila');
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) { // redirects if no user logged in
     header("Location: ../index.php");
-    exit;
+    exit();
 }
 
+// this if block only executes if the user's role is requestor
 if ($_SESSION['role'] === 'Requestor') {
 
+    // declarations of various sessions to be used
     $userId = $_SESSION['user_id'];
     $description = trim($_POST['description']);
     $requestType = $_POST['request-types'];
-    $status = 'Open';
+    $status = 'Pending';
 
     $stmt = $conn->prepare("
         INSERT INTO Ticket
@@ -36,6 +38,7 @@ if ($_SESSION['role'] === 'Requestor') {
     exit();
 }
 
+// this if block only executes if the user's role is manager
 if ($_SESSION['role'] === 'Manager') {
 
     $status = $_POST['status'];

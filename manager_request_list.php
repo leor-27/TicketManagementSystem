@@ -25,7 +25,7 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
     <div class="dropdown-menu">
         <div class="menu-header">
             <button>
-                <a href="manager-user-list.php">User List</a>
+                <a href="manager_request_list.php">User List</a>
             </button>
             <button>
                 <a href="manager_dashboard.php">Ticket List</a>
@@ -52,8 +52,8 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
             <?php
                 $birthdate = new DateTime($row['BIRTHDATE']);
                 $today = new DateTime();
-                $age = $today->diff($birthdate)->y;
-            ?>
+                $age = $today->diff($birthdate)->y; // formats the birthdate to age
+            ?> 
 
             <tr>
                 <td><?=htmlspecialchars($row['NAME']) ?></td>

@@ -14,7 +14,7 @@ include 'backend/db.php';
 <body>
     <h1>Sign Up</h1>
 
-    <form id="admin-form" action="backend/login-handler.php" method="POST">
+    <form id="admin-form" action="backend/login-handler.php" method="POST"> <!-- calls the login-handler in the backend and sends the form-->
         <input type="hidden" name="step" value="signup">
 
         <div class = "fields">
