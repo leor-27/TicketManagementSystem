@@ -2,7 +2,7 @@
 session_start();
 include 'backend/db.php';
 
-$users = "SELECT Ticket.*, User.EMAIL
+$users = "SELECT Ticket.*, User.NAME
     FROM Ticket
     JOIN User ON Ticket.USER_ID = User.USER_ID
     ORDER BY Ticket.CREATED_AT DESC"; // joined the User and Ticket entities to retrieve simultaneously
@@ -61,7 +61,7 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
             <tr>
             <form action="backend/ticket-handler.php" method="POST">  <!-- removed this: id="ticket-form" class="ticket-form" -->
                 <td><?=htmlspecialchars($row['TICKET_ID']) ?></td> 
-                <td><?=htmlspecialchars($row['EMAIL']) ?></td>
+                <td><?=htmlspecialchars($row['NAME']) ?></td>
                 <td><?=htmlspecialchars($row['REQUEST_TYPE']) ?></td>
                 <td><?=htmlspecialchars($row['DESCRIPTION']) ?></td>
                 <td><?=htmlspecialchars($row['STATUS']) ?></td>
@@ -69,7 +69,7 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
                     <?php
                         $created = new DateTime($row['CREATED_AT']);
                         echo $created->format("M j, Y H:i"); // formats the date
-                    ?> <!-- ai -->
+                    ?>  
                 </td>
                 <td>
                     <?php
@@ -78,19 +78,19 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
                     ?>
                 </td>
                 <td>
-                    <select id="status" name = "status" class="filter-btn" required>
-                        <option value="Pending">Pending</option>
-                        <option value="Open">Open</option>
-                        <option value="Ongoing">Ongoing</option>
-                        <option value="Accepted">Accepted</option>
-                        <option value="Rejected">Rejected</option>
-                        <option value="Closed">Closed</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Failed">Failed</option>
-                    </select>
+                    <select id="status" name = "status" class="filter-btn" required> 
+                        <option value="Pending" <?= $row['STATUS'] === 'Pending' ? 'selected' : '' ?>>Pending</option> <!-- ai -->
+                        <option value="Open" <?= $row['STATUS'] === 'Open' ? 'selected' : '' ?>>Open</option>
+                        <option value="Ongoing" <?= $row['STATUS'] === 'Ongoing' ? 'selected' : '' ?>>Ongoing</option>
+                        <option value="Accepted" <?= $row['STATUS'] === 'Accepted' ? 'selected' : '' ?>>Accepted</option>
+                        <option value="Rejected" <?= $row['STATUS'] === 'Rejected' ? 'selected' : '' ?>>Rejected</option>
+                        <option value="Closed" <?= $row['STATUS'] === 'Closed' ? 'selected' : '' ?>>Closed</option>
+                        <option value="Completed" <?= $row['STATUS'] === 'Completed' ? 'selected' : '' ?>>Completed</option>
+                        <option value="Failed" <?= $row['STATUS'] === 'Failed' ? 'selected' : '' ?>>Failed</option>
+                    </select> <!-- ensures that the default value in the dropdown is the current status -->
                 </td>
                 <td> 
-                    <input type="hidden" name="ticket_id" value="<?= $row['TICKET_ID'] ?>"> <!-- ai generated -->
+                    <input type="hidden" name="ticket_id" value="<?= $row['TICKET_ID'] ?>">
                     <button type="submit">Update</button> 
                 </td>
             </form>

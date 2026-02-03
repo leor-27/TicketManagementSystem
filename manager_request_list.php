@@ -2,7 +2,7 @@
 session_start();
 include 'backend/db.php';
 
-$users = "SELECT * FROM User ORDER BY USER_ID DESC";
+$users = "SELECT * FROM User WHERE ROLE = 'Requestor' ORDER BY USER_ID DESC"; // ensures only the requestors' info shows up
 $userList = $conn->query($users);
 
 if (!isset($_SESSION['role'])) { // redirects if user is not logged in

@@ -29,7 +29,6 @@ if ($step === 'login') { // runs if the user logged in with credentials already 
             $_SESSION['user_logged_in'] = true;
             $_SESSION['user_id'] = $user['USER_ID'];
             $_SESSION['role'] = $user['ROLE'];
-            $_SESSION['latestLoginTime'] = date("Y-m-d H:i:s");;
 
             if ($user['ROLE'] === 'Requestor') {
                 header("Location: ../requestor_profile.php");

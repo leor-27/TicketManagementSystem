@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
 $user = "root";
-$password = "cscpeboy12";
-$dbname = "php_activity1";
+$password = "";
+$dbname = "ticket_manager";
 
 // creates connection
 $conn = new mysqli($host, $user, $password, $dbname);

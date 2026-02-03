@@ -7,4 +7,4 @@ session_destroy();
 
 /* references the loggedOut status declared in index.php which alerts a message to the user */
 header("Location: ../index.php?status=loggedOut");
-exit;
+exit();

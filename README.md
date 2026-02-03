@@ -1,6 +1,6 @@
 ## Ticket Management System
 
-Admin/Manager credentials:
-- admin@gmail.com / Admin123
+Manager credentials:
+- manager@gmail.com / Admin123
 
-For regular users/requestors, kindly just sign up.
+Note: This is designed to only have one manager/admin, with predefined credentials. For regular users/requestors, however, you'll need to sign up / register first.

@@ -2,7 +2,7 @@
 session_start();
 include 'backend/db.php';
 
-$users = "SELECT Ticket.*, User.EMAIL
+$users = "SELECT Ticket.*, User.NAME
     FROM Ticket
     JOIN User ON Ticket.USER_ID = User.USER_ID
     ORDER BY Ticket.CREATED_AT DESC"; // ai generated  // joined the User and Ticket entities to retrieve simultaneously
@@ -64,7 +64,7 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
         </div>
     
         <div class = "dashboard">
-            <table>
+            <table class = "ticket-list">
                 <colgroup>
                     <col class="requestor-id"> <col class="requestor"> 
                     <col class="request-type"> <col class="request-status"> 
@@ -83,11 +83,21 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
                         while ($row = $userList->fetch_assoc()): ?>
                     <tr>
                         <td><?=htmlspecialchars($row['TICKET_ID']) ?></td> <!-- shows the database values -->
-                        <td><?=htmlspecialchars($row['EMAIL']) ?></td>
+                        <td><?=htmlspecialchars($row['NAME']) ?></td>
                         <td><?=htmlspecialchars($row['REQUEST_TYPE']) ?></td>
                         <td><?=htmlspecialchars($row['STATUS']) ?></td>
-                        <td><?=htmlspecialchars($row['CREATED_AT']) ?></td>
-                        <td><?=htmlspecialchars($row['LAST_UPDATED']) ?></td>
+                        <td>                    
+                            <?php
+                                $created = new DateTime($row['CREATED_AT']);
+                                echo $created->format("M j, Y H:i"); // formats the date
+                            ?> <!-- ai -->
+                        </td>
+                        <td>
+                            <?php
+                                $updated = new DateTime($row['LAST_UPDATED']);
+                                echo $updated->format("M j, Y H:i");
+                            ?>
+                        </td>
                     </tr>
                     <?php endwhile; ?>
                 </tbody>
