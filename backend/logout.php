@@ -2,26 +2,9 @@
 session_start();
 include 'backend/db.php';
 
-// /* unset all session variables */
-// $_SESSION = [];
-// session_destroy();
-
-// /* prevents session fixation via browser cache */
-// if (ini_get("session.use_cookies")) {
-//     $params = session_get_cookie_params();
-//     setcookie(
-//         session_name(),
-//         '',
-//         time() - 42000,
-//         $params["path"],
-//         $params["domain"],
-//         $params["secure"],
-//         $params["httponly"]
-//     );
-// }
-
 session_unset();
 session_destroy();
 
-header("Location: ../index.php?status=loggedout");
+/* references the loggedOut status declared in index.php which alerts a message to the user */
+header("Location: ../index.php?status=loggedOut");
 exit;

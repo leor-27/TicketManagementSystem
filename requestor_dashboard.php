@@ -2,7 +2,10 @@
 session_start();
 include 'backend/db.php';
 
-$users = "SELECT * FROM Ticket ORDER BY USER_ID DESC";
+$users = "SELECT Ticket.*, User.EMAIL
+    FROM Ticket
+    JOIN User ON Ticket.USER_ID = User.USER_ID
+    ORDER BY Ticket.USER_ID DESC"; // ai generated
 $userList = $conn->query($users);
 
 if (!isset($_SESSION['role'])) {
@@ -36,10 +39,10 @@ if (!isset($_SESSION['role'])) {
     <div class = "ticket-inputs">
         <div class = "tickets">
             <form id="ticket-form" class="ticket-form" action="backend/ticket-handler.php" method="POST">
-                <input type="hidden" name="step" id="step" value="login">
+                <input type="hidden" name="step" id="step" value="createTicket">
 
                 <div class = "fields">
-                    <label id="request-types">Request Type: </label>
+                    <label for="request-types">Request Type: </label>
 
                     <select id="request-types" name = "request-types" class="filter-btn" required>
                         <option value="general">General Inquiry</option>
@@ -52,7 +55,7 @@ if (!isset($_SESSION['role'])) {
 
                 <div class = "fields">
                     <label id="description-label">Description: </label>
-                    <textarea rows="3" id="descripton" name="description" required> </textarea>
+                    <textarea rows="3" id="description" name="description" required> </textarea>
                 </div>
 
                 <button type="submit" class="submitTicket" id="submitTicket">Submit Ticket</button>
@@ -80,7 +83,7 @@ if (!isset($_SESSION['role'])) {
                         while ($row = $userList->fetch_assoc()): ?>
                     <tr>
                         <td><?=htmlspecialchars($row['TICKET_ID']) ?></td>
-                        <td><?=htmlspecialchars($row['USER_ID']) ?></td>
+                        <td><?=htmlspecialchars($row['EMAIL']) ?></td>
                         <td><?=htmlspecialchars($row['REQUEST_TYPE']) ?></td>
                         <td><?=htmlspecialchars($row['STATUS']) ?></td>
                         <td><?=htmlspecialchars($row['CREATED_AT']) ?></td>

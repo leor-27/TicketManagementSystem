@@ -5,7 +5,7 @@ include 'backend/db.php';
 $users = "SELECT * FROM User ORDER BY USER_ID DESC";
 $userList = $conn->query($users);
 
-if (!isset($_SESSION['role'])) {
+if (!isset($_SESSION['role'])) { // redirects if user is not logged in
     header("Location: index.php");
     exit;
 }
@@ -30,7 +30,7 @@ if (!isset($_SESSION['role'])) {
                 <a href="manager-user-list.php">User List</a>
             </button>
             <button>
-                <a href="manager-dashboard.php">Ticket List</a>
+                <a href="manager_dashboard.php">Ticket List</a>
             </button>
         </div>
     </div>
@@ -43,17 +43,27 @@ if (!isset($_SESSION['role'])) {
             <th>Name</th>
             <th>Email</th>
             <th>Password</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Mobile Number</th>
         </tr>  
         <tbody>
             <?php
                 while ($row = $userList->fetch_assoc()): ?>
+
+            <?php
+                $birthdate = new DateTime($row['BIRTHDATE']);
+                $today = new DateTime();
+                $age = $today->diff($birthdate)->y;
+            ?>
+
             <tr>
                 <td><?=htmlspecialchars($row['NAME']) ?></td>
                 <td><?=htmlspecialchars($row['EMAIL']) ?></td>
                 <td><?=htmlspecialchars($row['PASSWORD']) ?></td>
-                <!-- <td><?=htmlspecialchars($row['BIRTHDATE']) ?></td>
+                <td><?= $age ?></td>
                 <td><?=htmlspecialchars($row['GENDER']) ?></td>
-                <td><?=htmlspecialchars($row['MOBILE_NUMBER']) ?></td> -->
+                <td>+<?=htmlspecialchars($row['MOBILE_NUMBER']) ?></td>
             </tr>
             <?php endwhile; ?>
         </tbody>

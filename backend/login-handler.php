@@ -17,51 +17,19 @@ if ($step === 'login') { // runs if the user logged in with credentials already 
         exit;
     }
 
-    // checks the admin
-    // $adminRow = $conn->prepare("SELECT * FROM Admin WHERE EMAIL = ? LIMIT 1");
-    // $adminRow->bind_param("s", $email);
-    // $adminRow->execute();
-    // $adminResult = $adminRow->get_result();
-
-    // if ($admin = $adminResult->fetch_assoc()) {
-    //     if ($password === 'Admin123') {
-    //         $_SESSION['user_logged_in'] = true;
-    //         $_SESSION['role'] = 'Admin';
-    //         $_SESSION['userList'] = '.userList';
-    //         $_SESSION['ticketList'] = '.ticketList';
-    //         header("Location: ../manager.php");
-    //         exit;
-    //     }
-    // }
-
-    // checks users
+    // checks the users from database
     $userRow = $conn->prepare("SELECT USER_ID, PASSWORD, ROLE FROM User WHERE EMAIL = ? LIMIT 1");
     $userRow->bind_param("s", $email);
     $userRow->execute();
     $result = $userRow->get_result();
 
     if ($user = $result->fetch_assoc()) {
-        // if ($password === 'Admin123') { // for now 
-        //     $_SESSION['user_logged_in'] = true;
-        //     $_SESSION['user_id'] = $user['USER_ID'];
-        //     $_SESSION['role'] = $user['ROLE'];
-
-        //     if (isset($_SESSION['role']) && $_SESSION['role'] === 'Manager') {
-        //         header("Location: ../manager-user-list.php");
-        //         exit;
-        //     }
-        // } // remoc
 
         if (password_verify($password, $user['PASSWORD'])) { // checks if the password inputted matches the hashed one in the database
             $_SESSION['user_logged_in'] = true;
             $_SESSION['user_id'] = $user['USER_ID'];
             $_SESSION['role'] = $user['ROLE'];
             $_SESSION['latestLoginTime'] = time();
-
-            // if (isset($_SESSION['role']) && $_SESSION['role'] === 'Requestor') {
-            //     header("Location: ../user-profile.php");
-            //     exit;
-            // }
 
             if ($user['ROLE'] === 'Requestor') {
                 header("Location: ../user-profile.php");
@@ -72,11 +40,6 @@ if ($step === 'login') { // runs if the user logged in with credentials already 
                 header("Location: ../manager-user-list.php");
                 exit;
             }
-
-            // if (isset($_SESSION['role']) && $_SESSION['role'] === 'Manager') {
-            //     header("Location: ../manager-user-list.php");
-            //     exit;
-            // }
         }
     }
 
@@ -147,7 +110,7 @@ if ($step === 'signup') { // if the user is signing up for the first time with n
     // the generated password that is alerted to the user after the signing up
     echo "<script>
         alert('Account created! Your password is: {$plainPassword}');
-        window.location.href = '../index.php?newuser=' + encodeURIComponent('{$first}');
+        window.location.href = '../index.php?newUser=' + encodeURIComponent('{$first}'); // references the newUser status declared in index.php
     </script>";
     exit;
 

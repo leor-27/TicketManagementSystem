@@ -16,23 +16,23 @@ include 'backend/db.php';
     <h2>Login</h2>
 
     <?php 
-    if (isset($_GET['status']) && $_GET['status'] === 'loggedout') {
+    if (isset($_GET['status']) && $_GET['status'] === 'loggedOut') {
         echo "<script> 
                 alert('You have been logged out successfully.');
             </script>";
-        }
+        } // displays the message when the user clicks the logout button and was redirected from logout.php
     ?>
 
     <?php 
-    if (isset($_GET['newuser'])) {
-        $name = htmlspecialchars($_GET['newuser']);
+    if (isset($_GET['newUser'])) {
+        $name = htmlspecialchars($_GET['newUser']);
         echo "<script> 
             alert('Welcome, $name! Please login with your generated password.');
         </script>";
-    }
+    } // displays the message after the user signed up for the first time and showed the generated password
     ?>
 
-    <form id="admin-form" class="admin-form" action="backend/login-handler.php" method="POST">
+    <form id="admin-form" class="admin-form" action="backend/login-handler.php" method="POST"> <!-- calls the login-handler in the backend -->
         <input type="hidden" name="step" id="step" value="login">
 
         <div class = "fields">

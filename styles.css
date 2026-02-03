@@ -71,3 +71,7 @@ button:hover {
 .signUpText {
     font-weight: 600;
 }
+
+tbody {
+    font-size: 14px;
+}
