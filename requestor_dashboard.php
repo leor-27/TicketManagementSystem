@@ -5,7 +5,7 @@ include 'backend/db.php';
 $users = "SELECT Ticket.*, User.NAME
     FROM Ticket
     JOIN User ON Ticket.USER_ID = User.USER_ID
-    ORDER BY Ticket.CREATED_AT DESC"; // ai generated  // joined the User and Ticket entities to retrieve simultaneously
+    ORDER BY Ticket.CREATED_AT DESC"; // joined the User and Ticket entities to retrieve simultaneously
 $userList = $conn->query($users);
 
 if (!isset($_SESSION['role'])) { // redirects if user is not logged in
@@ -90,7 +90,7 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
                             <?php
                                 $created = new DateTime($row['CREATED_AT']);
                                 echo $created->format("M j, Y H:i"); // formats the date
-                            ?> <!-- ai -->
+                            ?>
                         </td>
                         <td>
                             <?php

@@ -79,7 +79,7 @@ if (!isset($_SESSION['role'])) { // redirects if user is not logged in
                 </td>
                 <td>
                     <select id="status" name = "status" class="filter-btn" required> 
-                        <option value="Pending" <?= $row['STATUS'] === 'Pending' ? 'selected' : '' ?>>Pending</option> <!-- ai -->
+                        <option value="Pending" <?= $row['STATUS'] === 'Pending' ? 'selected' : '' ?>>Pending</option>
                         <option value="Open" <?= $row['STATUS'] === 'Open' ? 'selected' : '' ?>>Open</option>
                         <option value="Ongoing" <?= $row['STATUS'] === 'Ongoing' ? 'selected' : '' ?>>Ongoing</option>
                         <option value="Accepted" <?= $row['STATUS'] === 'Accepted' ? 'selected' : '' ?>>Accepted</option>
